@@ -8,6 +8,9 @@ using UnityEngine;
 /// </summary>
 public class PlayerShoot : MonoBehaviour
 {
+    // accessed denied variables
+    [SerializeField] private Tutorial_GrapplingGun grapplingGun;
+
     public Camera sceneCamera;
     private Rigidbody2D rb;
     private Vector2 _mousePosition;
@@ -25,7 +28,7 @@ public class PlayerShoot : MonoBehaviour
     {
         _mousePosition = sceneCamera.ScreenToWorldPoint(Input.mousePosition);
 
-        if(Input.GetKeyDown(KeyCode.Space) && canFire)
+        if(Input.GetMouseButtonDown(1) && canFire && !grapplingGun.grappleRope.isGrappling)
         {
             weapon.Fire();
             canFire = false;
