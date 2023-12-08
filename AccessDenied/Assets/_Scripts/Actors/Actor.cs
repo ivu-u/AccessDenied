@@ -36,7 +36,7 @@ public class Actor : MonoBehaviour
         _hitpoints += heal;
     }
 
-    private void Faint() {
+    protected virtual void Faint() {
         // probably override this based on if it's a player or an enemy
     }
 }

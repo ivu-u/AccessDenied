@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7519486787729727745}
   - component: {fileID: 4871581865078700197}
   m_Layer: 0
-  m_Name: Particle System
+  m_Name: Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -287,8 +287,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.6
-      minScalar: 0.2
+      scalar: 0.2
+      minScalar: 0.05
       maxCurve:
         serializedVersion: 2
         m_Curve:

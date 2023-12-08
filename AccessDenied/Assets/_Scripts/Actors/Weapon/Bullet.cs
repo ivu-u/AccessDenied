@@ -11,6 +11,7 @@ public class Bullet : MonoBehaviour
     [Header("Destroy Bullet Based On Time")]
     public bool destroyBasedOnTime;
     [SerializeField] private float destroyTime = 3f;
+    [SerializeField] private int bulletDamage = 1;
     public GameObject impactEffect;
 
     void Start() {
@@ -23,6 +24,12 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision) {
         Instantiate(impactEffect, transform.position, Quaternion.identity);
+
+        if (collision.gameObject.GetComponent<Actor>() != null) {
+            Actor actor = collision.gameObject.GetComponent<Actor>();
+            actor.DepleteHitpoints(bulletDamage);
+        }
+
         DestroySelf();
     }
 }
