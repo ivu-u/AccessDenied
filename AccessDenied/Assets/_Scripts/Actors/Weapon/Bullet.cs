@@ -11,6 +11,7 @@ public class Bullet : MonoBehaviour
     [Header("Destroy Bullet Based On Time")]
     public bool destroyBasedOnTime;
     [SerializeField] private float destroyTime = 3f;
+    public GameObject impactEffect;
 
     void Start() {
         if (destroyBasedOnTime) { Invoke("DestroySelf", destroyTime); }
@@ -21,6 +22,7 @@ public class Bullet : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
+        Instantiate(impactEffect, transform.position, Quaternion.identity);
         DestroySelf();
     }
 }
