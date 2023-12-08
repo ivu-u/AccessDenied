@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class Tutorial_GrapplingRope : MonoBehaviour {
@@ -80,6 +81,7 @@ public class Tutorial_GrapplingRope : MonoBehaviour {
     }
 
     void DrawRopeWaves() {
+
         for (int i = 0; i < percision; i++) {
             float delta = (float)i / ((float)percision - 1f);
             Vector2 offset = Vector2.Perpendicular(grapplingGun.grappleDistanceVector).normalized * ropeAnimationCurve.Evaluate(delta) * waveSize;
