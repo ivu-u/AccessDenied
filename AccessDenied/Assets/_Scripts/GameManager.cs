@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 /// <summary>
@@ -8,6 +9,8 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }    // Singleton B)))
+    public TextMeshProUGUI scoreText;
+    public GameObject gameOverScreen;
 
     private int score = 0;
 
@@ -22,6 +25,7 @@ public class GameManager : MonoBehaviour
 
     public void AddScore(int amount) {
         score += amount;
+        UpdateScoreText();
     }
 
     public int GetScore() {
@@ -29,6 +33,12 @@ public class GameManager : MonoBehaviour
     }
 
     public void GameOver() {
+        gameOverScreen.active = true;
+    }
 
+    private void UpdateScoreText() {
+        if (scoreText != null) {
+            scoreText.text = "Score: " + score.ToString();
+        }
     }
 }
