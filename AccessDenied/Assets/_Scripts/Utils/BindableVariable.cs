@@ -18,7 +18,7 @@ using UnityEngine;
 /// </para>
 /// </remarks>
 [Serializable]
-public class Variable<T> {
+public class BindableVariable<T> {
 	[SerializeField] private T _Value;
 	
 	///<summary>Get or set values. When setting a value, it first sets the internal value then it calls upon all of its Listeners depending on if it calls on value change or when value is set even to the same value</summary>
@@ -57,10 +57,10 @@ public class Variable<T> {
 	/// <summary>
 	/// Creates and returns a Variable class with the stored parameter as its Value.
 	/// </summary>
-	/// See <see cref="Variable(T, bool)"/> to define if the Variable should check whenever a new value assigned to it should be checked if same.
+	/// See <see cref="BindableVariable(T, bool)"/> to define if the Variable should check whenever a new value assigned to it should be checked if same.
 	/// <typeparam name="T">The type of the stored value of Variable.</typeparam>
 	/// <param name="value">The Variable object's stored value.</param>
-	public Variable(T value) {
+	public BindableVariable(T value) {
 		this._Value = value;
 		this.Locked = false;
 	}
@@ -70,13 +70,13 @@ public class Variable<T> {
 	/// </summary>
 	/// <typeparam name="T">The type of the stored value of Variable.</typeparam>
 	/// <param name="value">The Variable object's stored value.</param>
-	public Variable(T value, bool CheckIfSame) {
+	public BindableVariable(T value, bool CheckIfSame) {
 		this._Value = value;
 		this.CheckIfSame = CheckIfSame;
 		this.Locked = false;
 	}
 
-	public Variable() {
+	public BindableVariable() {
 		this.Locked = false;
 	}
 
@@ -118,7 +118,7 @@ public class Variable<T> {
 }
 
 [Serializable]
-public class DesiredAction<T> : Variable<T> {
+internal class DesiredAction<T> : BindableVariable<T> {
 	public T Actual { get => Value; }
 
 	//[SerializeProperty("Desired")]
