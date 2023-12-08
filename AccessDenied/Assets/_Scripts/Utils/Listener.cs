@@ -6,54 +6,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// A class that's analagous to UnityEvent. This one just allows for automatic memory management by destroying itself.
-/// </summary>
-public abstract class BindableEvent : IDisposable {
-	/// <summary>Protected bool that defines if the function is destroyed right after calling.</summary>
-	protected bool _PlayOnce = false;
-
-	///<summary>Protected bool that defines if the function is destroyed right after calling.</summary>
-	public bool PlayOnce {
-		get => this._PlayOnce;
-	}
-
-	/// <summary>Defines if the function is currently running. (Useless as of now)</summary>
-	public bool Running = false;
-	
-	/// <summary>Unique name of Listener that makes debugging easier.</summary>
-	public string Name = null;
-	/// <summary>Protected bool that if the function is queued for garbage collection</summary>
-	protected bool _Destroyed = false;
-
-	/// <summary>If the function is queued for garbage collection</summary>
-	public bool Destroyed {
-		get {
-			return this._Destroyed;
-		}
-	}
-
-	/// <summary>
-	/// Disconnects function from variable and queues it for garbage collection.
-	/// </summary>
-	public void Disconnect() {
-		this._Destroyed = true;
-	}
-
-	/// <summary>
-	/// Same as .Disconnect()
-	/// </summary>
-	public void Destroy() {
-		this.Disconnect();
-	}
-
-	/// <summary>
-	/// Same as .Disconnect()
-	/// </summary>
-	public void Dispose() {
-		this.Disconnect();
-	}
-}
 
 /// <summary>
 /// This class is used as a way to encapsulate functions in order to use them as variables for function parameters, etc.
@@ -67,11 +19,14 @@ public abstract class BindableEvent : IDisposable {
 /// Basically, function return true = good, function return false = bad and destroyed/disconnected immediately.
 /// </para>
 /// </remarks>
-public class Listener<T> : BindableEvent {
+public class Listener<T> : DisposableEvent {
 	/// <summary>Private property that stores the actual function.</summary>
 	private Func<T, bool> _Func;
+
 	/// <summary>Private reference to List that stores this object.</summary>
 	private List<Listener<T>> _Parent;
+
+	private List<Listener<T>> _InternalFunc;
 
 	/// <summary>
 	/// Initialize Listener.

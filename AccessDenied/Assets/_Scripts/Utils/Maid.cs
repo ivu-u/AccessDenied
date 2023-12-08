@@ -8,6 +8,7 @@ using System.Reflection;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEditor;
+
 /// <summary>
 /// Manages the cleaning of events and other things.
 /// </summary>
