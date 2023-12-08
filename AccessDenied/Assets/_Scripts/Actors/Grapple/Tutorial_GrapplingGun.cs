@@ -37,7 +37,7 @@ public class Tutorial_GrapplingGun : MonoBehaviour {
     [SerializeField] private bool launchToPoint = true;
     [SerializeField] private LaunchType launchType = LaunchType.Physics_Launch;
     [SerializeField] private float launchSpeed = 1;
-    [SerializeField] private float minRopeLength = 5;
+    [SerializeField] private float ropeShrinkPercent = 0.5f;
 
     [Header("No Launch To Point")]
     [SerializeField] private bool autoConfigureDistance = false;
@@ -136,7 +136,14 @@ public class Tutorial_GrapplingGun : MonoBehaviour {
 
                     Vector2 firePointDistanceVector = firePoint.position - gunHolder.position;
 
-                    m_springJoint2D.distance = Mathf.Max(firePointDistanceVector.magnitude, minRopeLength);
+                    //float distanceToShrink;
+                    //if (firePointDistanceVector.magnitude > minRopeLength) {
+                    //    distanceToShrink = firePointDistanceVector.magnitude;
+                    //} else {
+                    //    distanceToShrink = minRopeLength;
+                    //}
+
+                    m_springJoint2D.distance = Mathf.Max(firePointDistanceVector.magnitude, firePointDistanceVector.magnitude * ropeShrinkPercent);
 
 
                     //m_springJoint2D.distance = firePointDistanceVector.magnitude;
