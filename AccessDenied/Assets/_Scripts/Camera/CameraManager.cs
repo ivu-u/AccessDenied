@@ -19,13 +19,16 @@ public class CameraManager : MonoBehaviour
     Vector3 followPointerPosition = new Vector3();
 
     void Update() {
-        // calculate position for mouse tracker
-        mousePosition = _camera.ScreenToWorldPoint(Input.mousePosition);
-        mousePosition.z = 0f;
 
-        // calculate position for follow pointer
-        followPointerPosition = (mousePosition + player.transform.position) / 2;    // midpoint calc
-        followPointerPosition = (followPointerPosition + player.transform.position) / 2;    //quarterpoint calc
-        followPointer.transform.position = followPointerPosition;
+        if (player != null) {
+            // calculate position for mouse tracker
+            mousePosition = _camera.ScreenToWorldPoint(Input.mousePosition);
+            mousePosition.z = 0f;
+
+            // calculate position for follow pointer
+            followPointerPosition = (mousePosition + player.transform.position) / 2;    // midpoint calc
+            followPointerPosition = (followPointerPosition + player.transform.position) / 2;    //quarterpoint calc
+            followPointer.transform.position = followPointerPosition;
+        }
     }
 }

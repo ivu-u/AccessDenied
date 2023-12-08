@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class PlayerActor : Actor
 {
-    private void Faint() {
-        // override from Actor.cs
+    public GameObject deathEffect;
+
+    protected override void Faint() {
+        Instantiate(deathEffect, transform.position, Quaternion.identity);
+        Destroy(gameObject);
+        GameManager.Instance.GameOver();
     }
 }

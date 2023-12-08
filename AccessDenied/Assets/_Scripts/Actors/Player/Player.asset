@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Player
   m_EditorClassIdentifier: 
   actorName: Player
-  maxHitpoints: 100
+  maxHitpoints: 20
